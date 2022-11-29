@@ -1,5 +1,5 @@
 [package]
-name = "serde_nested_toml"
+name = "toml_dir"
 version = "0.1.0"
 edition = "2021"
 

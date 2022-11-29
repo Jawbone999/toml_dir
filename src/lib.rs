@@ -14,7 +14,7 @@ pub enum Error {
     SerToml(#[from] toml::ser::Error),
 }
 
-pub fn from_dir<'de, T, P>(path: P) -> Result<T, Error>
+pub fn parse<'de, T, P>(path: P) -> Result<T, Error>
 where
     T: Deserialize<'de>,
     P: AsRef<Path>,
@@ -28,7 +28,7 @@ where
         let file_name = entry.file_name().to_string_lossy().to_string();
 
         let value = match file_type.is_dir() {
-            true => from_dir(&path)?,
+            true => parse(&path)?,
             false => from_file(&path)?,
         };
 
