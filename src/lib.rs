@@ -25,7 +25,11 @@ where
         let entry = entry?;
         let path = entry.path();
         let file_type = entry.file_type()?;
-        let file_name = entry.file_name().to_string_lossy().to_string();
+        let file_name = path
+            .file_stem()
+            .unwrap_or_default()
+            .to_string_lossy()
+            .to_string();
 
         let value = match file_type.is_dir() {
             true => parse(&path)?,
